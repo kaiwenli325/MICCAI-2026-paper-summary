@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Search and explore bilingual summaries of accepted MICCAI 2026 papers." />
+    <meta name="theme-color" content="#f4f7fb" />
+    <title>MICCAI 2026 Paper Explorer</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#paper-list">跳到论文列表</a>
+
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="MICCAI 2026 Paper Explorer home">
+          <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M22 3.5 38 12.8v18.4L22 40.5 6 31.2V12.8L22 3.5Z" fill="currentColor" opacity=".12" />
+            <path d="m22 4 16 9-16 9-16-9 16-9Zm0 18v18m16-27v18l-16 9-16-9V13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" />
+            <path d="m14.5 17.8 15.2-8.7M30 17.7 14.7 9" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".6" />
+          </svg>
+          <span><strong>MICCAI ’26</strong><small>Paper Explorer</small></span>
+        </a>
+
+        <nav class="header-actions" aria-label="Main navigation">
+          <a class="nav-link" href="#explore" data-i18n="explore">论文探索</a>
+          <a class="nav-link" href="#about" data-i18n="about">关于项目</a>
+          <a class="icon-link" href="https://github.com/kaiwenli325/MICCAI-2026-paper-summary" target="_blank" rel="noreferrer" aria-label="GitHub repository">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.36-3.9-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.57-.29-5.27-1.28-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18a10.9 10.9 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.71 5.39-5.28 5.68.42.36.78 1.06.78 2.14v3.16c0 .31.21.67.79.56A11.5 11.5 0 0 0 12 .7Z" fill="currentColor"/></svg>
+          </a>
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="切换深色模式">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.6A8.5 8.5 0 0 1 8.4 3.8 8.5 8.5 0 1 0 20.2 15.6Z"/></svg>
+          </button>
+          <div class="language-switch" role="group" aria-label="Language">
+            <button type="button" data-lang="zh" class="active">中文</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="shell hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow"><span></span><span data-i18n="eyebrow">MICCAI 2026 · 论文导航</span></div>
+            <h1 data-i18n="heroTitle">MICCAI 2026 论文总结</h1>
+            <p data-i18n="heroText">汇集 MICCAI 2026 接收论文的中英文概述。搜索问题、方法、器官、模态与任务，快速掌握今年的研究版图。</p>
+            <div class="hero-actions">
+              <a class="primary-button" href="#explore"><span data-i18n="startExploring">开始探索</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 6 6-6 6"/></svg></a>
+              <button class="secondary-button" id="random-paper" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M14 3h3v3M3 5h2.2a3 3 0 0 1 2.6 1.5l4.4 7a3 3 0 0 0 2.6 1.5H17M14 17h3v-3M3 15h2.2a3 3 0 0 0 2.6-1.5l1-1.6M12 6.5A3 3 0 0 1 14.8 5H17"/></svg><span data-i18n="randomPaper">随机一篇</span></button>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orbit orbit-one"><span></span></div>
+            <div class="orbit orbit-two"><span></span></div>
+            <div class="core-card">
+              <span class="core-label">MICCAI</span>
+              <strong>2026</strong>
+              <small>Medical Image Computing<br />& Computer Assisted Intervention</small>
+            </div>
+            <div class="floating-tag tag-one">MRI</div>
+            <div class="floating-tag tag-two">Vision · AI</div>
+            <div class="floating-tag tag-three">Surgery</div>
+          </div>
+        </div>
+        <div class="shell stats-row">
+          <div class="stat"><strong id="paper-count">—</strong><span data-i18n="acceptedPapers">篇论文概述</span></div>
+          <div class="stat"><strong id="code-count">—</strong><span data-i18n="openSource">项开源代码</span></div>
+          <div class="stat"><strong id="topic-count">—</strong><span data-i18n="researchTopics">个研究主题</span></div>
+          <div class="stat stat-note"><span class="live-dot"></span><span data-i18n="bilingual">中英文双语内容</span></div>
+        </div>
+      </section>
+
+      <section class="explorer shell" id="explore">
+        <div class="section-heading">
+          <div>
+            <span class="kicker" data-i18n="library">PAPER LIBRARY</span>
+          </div>
+          <p data-i18n="findPaperText">按标题、研究问题、方法或官方分类搜索，支持多条件组合筛选。</p>
+        </div>
+
+        <div class="search-panel">
+          <div class="search-row">
+            <label class="search-box" for="search-input">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="search-input" type="search" autocomplete="off" placeholder="搜索论文标题、方法或研究问题…" data-i18n-placeholder="searchPlaceholder" />
+              <kbd>/</kbd>
+            </label>
+            <button class="saved-toggle" id="saved-toggle" type="button" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.8A1.8 1.8 0 0 1 7.8 3h8.4A1.8 1.8 0 0 1 18 4.8V21l-6-3.8L6 21V4.8Z"/></svg>
+              <span data-i18n="saved">已收藏</span><span class="saved-count" id="saved-count">0</span>
+            </button>
+          </div>
+
+          <div class="filters" aria-label="Paper filters">
+            <label><span data-i18n="bodyPart">身体部位</span><select id="filter-body"><option value="" data-i18n="all">全部</option></select></label>
+            <label><span data-i18n="modality">成像模态</span><select id="filter-modality"><option value="" data-i18n="all">全部</option></select></label>
+            <label><span data-i18n="application">研究任务</span><select id="filter-application"><option value="" data-i18n="all">全部</option></select></label>
+            <label><span data-i18n="methodType">方法类型</span><select id="filter-ml"><option value="" data-i18n="all">全部</option></select></label>
+            <button id="clear-filters" class="clear-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4 4 16"/></svg><span data-i18n="clear">清除</span></button>
+          </div>
+        </div>
+
+        <div class="popular-topics" id="popular-topics" aria-label="Popular topics"></div>
+
+        <div class="results-toolbar">
+          <p id="result-summary" aria-live="polite"></p>
+          <label class="sort-control"><span data-i18n="sortBy">排序</span><select id="sort-select"><option value="number" data-i18n="paperNumber">论文编号</option><option value="title" data-i18n="titleAZ">标题 A–Z</option><option value="code" data-i18n="codeFirst">开源代码优先</option></select></label>
+        </div>
+
+        <div class="paper-grid" id="paper-list" aria-live="polite"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="31" cy="31" r="19"/><path d="m45 45 14 14M24 31h14"/></svg>
+          <h3 data-i18n="noResults">没有找到匹配的论文</h3>
+          <p data-i18n="noResultsText">试试更短的关键词，或清除部分筛选条件。</p>
+          <button class="secondary-button" type="button" id="empty-clear" data-i18n="clearFilters">清除全部筛选</button>
+        </div>
+        <div class="load-more-wrap"><button id="load-more" class="load-more" type="button"><span data-i18n="loadMore">加载更多</span><span id="remaining-count"></span></button></div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div class="shell about-grid">
+          <div>
+            <span class="kicker" data-i18n="aboutProject">ABOUT THE PROJECT</span>
+          </div>
+          <div class="about-copy">
+            <p data-i18n="aboutCopy">本站内容基于 MICCAI 2026 论文的 Abstract 与 Introduction 整理，帮助研究者快速了解每篇工作的核心问题与方法。原始总结开源并持续更新。</p>
+            <a class="text-link" href="https://github.com/kaiwenli325/MICCAI-2026-paper-summary" target="_blank" rel="noreferrer"><span data-i18n="viewSource">在 GitHub 查看源项目</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <a class="brand footer-brand" href="#top"><svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true"><path d="m22 4 16 9-16 9-16-9 16-9Zm0 18v18m16-27v18l-16 9-16-9V13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg><span><strong>MICCAI ’26</strong><small>Paper Explorer</small></span></a>
+        <a href="https://github.com/kaiwenli325" target="_blank" rel="noreferrer">© 2026 Kaiwen Li</a>
+      </div>
+    </footer>
+
+    <dialog id="paper-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-shell">
+        <button class="dialog-close" type="button" aria-label="Close"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4 4 16"/></svg></button>
+        <div id="dialog-content"></div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
